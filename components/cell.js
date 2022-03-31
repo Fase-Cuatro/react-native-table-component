@@ -4,17 +4,26 @@ import { View, Text, StyleSheet } from 'react-native';
 
 export class Cell extends Component {
   static propTypes = {
-    style: PropTypes.object,
-    textStyle: PropTypes.object,
+    data: PropTypes.any,
+    width: PropTypes.any,
+    height: PropTypes.number,
+    flex: PropTypes.number,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     borderStyle: PropTypes.object
   };
 
   render() {
     const { data, width, height, flex, style, textStyle, borderStyle, ...props } = this.props;
+    if (typeof data === 'number') {
+      estilosNumeros = props.estilosNumeros
+    } else {
+      estilosNumeros = null;
+    }
     const textDom = React.isValidElement(data) ? (
       data
     ) : (
-      <Text style={[textStyle, styles.text]} {...props}>
+      <Text style={[textStyle, styles.text, estilosNumeros]} {...props}>
         {data}
       </Text>
     );

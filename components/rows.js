@@ -6,13 +6,18 @@ import { sum } from '../utils';
 
 export class Row extends Component {
   static propTypes = {
-    style: PropTypes.object,
-    textStyle: PropTypes.object
+    data: PropTypes.array,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    widthArr: PropTypes.arrayOf(PropTypes.any),
+    height: PropTypes.number,
+    flexArr: PropTypes.arrayOf(PropTypes.number),
+    textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    cellTextStyle: PropTypes.func
   };
 
   render() {
     const { data, style, widthArr, height, flexArr, textStyle, cellTextStyle, ...props } = this.props;
-    let width = widthArr ? sum(widthArr) : 0;
+    let width = '100%';
 
     return data ? (
       <View style={[height && { height }, width && { width }, styles.row, style]}>
@@ -38,8 +43,12 @@ export class Row extends Component {
 
 export class Rows extends Component {
   static propTypes = {
-    style: PropTypes.object,
-    textStyle: PropTypes.object
+    data: PropTypes.array,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    widthArr: PropTypes.arrayOf(PropTypes.number),
+    heightArr: PropTypes.arrayOf(PropTypes.number),
+    flexArr: PropTypes.arrayOf(PropTypes.number),
+    textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
   };
 
   render() {
